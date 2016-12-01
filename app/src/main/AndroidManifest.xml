@@ -362,5 +362,8 @@
         </receiver>
 
         <service android:name="com.android.camera.MediaSaveService" />
+
+        <activity android:name=".app.VideoDomeActivity"/>
+        <activity android:name=".app.VideoViewDome2"/>
     </application>
 </manifest>
