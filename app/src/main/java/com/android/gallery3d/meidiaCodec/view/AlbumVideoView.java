@@ -11,7 +11,9 @@ import com.android.gallery3d.ui.GLView;
  * Created by linusyang on 16-12-1.
  */
 
-public class AlbumVideoView extends GLView implements VIPlayControl, OnNotifyChangeListener {
+public class AlbumVideoView extends GLView implements VIPlayControl, PlayView.OnNotifyChangeListener {
+
+
 
     private Context mContext;
     private Rect mWindowRect;
