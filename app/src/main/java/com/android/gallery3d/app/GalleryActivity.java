@@ -98,7 +98,7 @@ public final class GalleryActivity extends AbstractGalleryActivity implements On
          // startDefaultPage();
         //  getStateManager().startState(DomeActivity.class, null);
             //TODO
-            Intent mIntent = new Intent(this, VideoDomeActivity.class);
+            Intent mIntent = new Intent(this, VideoViewDome2.class);
             startActivity(mIntent);
         }
     }
