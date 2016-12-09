@@ -3,7 +3,7 @@ package com.android.gallery3d.app;
 import android.app.Activity;
 import android.os.Bundle;
 import com.android.gallery3d.R;
-import com.android.gallery3d.meidiaCodec.view.AlbumVideoView;
+import com.android.gallery3d.meidiaCodec.view.VideoView;
 import com.android.gallery3d.ui.GLRootView;
 
 /**
@@ -14,7 +14,7 @@ public class VideoDomeActivity extends Activity {
 
 
     private GLRootView mView;
-    private AlbumVideoView mVideo;
+    private VideoView mVideo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

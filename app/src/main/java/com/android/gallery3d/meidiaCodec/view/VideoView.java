@@ -1,24 +1,28 @@
 package com.android.gallery3d.meidiaCodec.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Rect;
 
 import com.android.gallery3d.glrenderer.GLCanvas;
 import com.android.gallery3d.meidiaCodec.Utils.Annotation;
 import com.android.gallery3d.ui.GLView;
 
+import java.util.LinkedList;
+
 /**
  * Created by linusyang on 16-12-1.
  */
 
-public class AlbumVideoView extends GLView implements VIPlayControl, PlayView.OnNotifyChangeListener {
+public class VideoView extends GLView implements VIPlayControl, PlayBits.OnNotifyChangeListener , StateIs{
 
 
 
     private Context mContext;
     private Rect mWindowRect;
 
-    public AlbumVideoView(Context context) {
+
+    public VideoView(Context context) {
         mContext = context;
     }
 
@@ -27,7 +31,6 @@ public class AlbumVideoView extends GLView implements VIPlayControl, PlayView.On
         super.onLayout(changeSize, left, top, right, bottom);
         mWindowRect = new Rect(left, top, right, bottom);
     }
-
 
     @Override
     protected void render(GLCanvas canvas) {
@@ -92,5 +95,10 @@ public class AlbumVideoView extends GLView implements VIPlayControl, PlayView.On
     @Annotation.IInterface("OnNotifyChangeListener")
     public void doInvalidate() {
         invalidate();
+    }
+
+
+    private void  checkNull(Object obj , String str) {
+        if(obj == null) throw new NullPointerException(str);
     }
 }

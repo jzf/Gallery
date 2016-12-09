@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.android.gallery3d.R;
-import com.android.gallery3d.meidiaCodec.view.AlbumVideoView;
+import com.android.gallery3d.meidiaCodec.view.VideoView;
 import com.android.gallery3d.ui.GLRootView;
 
 /**
@@ -14,14 +14,14 @@ import com.android.gallery3d.ui.GLRootView;
 public class VideoViewDome2 extends Activity{
 
     private GLRootView mView;
-    private AlbumVideoView mVideo;
+    private VideoView mVideo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_dome);
         mView = (GLRootView) findViewById(R.id.gl_root);
-        mVideo = new AlbumVideoView(this);
+        mVideo = new VideoView(this);
         mView.setContentPane(mVideo);
     }
 }
