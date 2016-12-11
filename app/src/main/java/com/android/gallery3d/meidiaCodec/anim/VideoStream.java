@@ -8,8 +8,6 @@ import com.android.gallery3d.glrenderer.GLCanvas;
 
 public class VideoStream extends MediaStream {
 
-
-
     @Override
     public void prepare() {
 
@@ -63,5 +61,10 @@ public class VideoStream extends MediaStream {
     @Override
     public boolean calculate(long currentTimeMillis) {
         return false;
+    }
+
+    @Override
+    protected void onCalculate(float progress) {
+
     }
 }

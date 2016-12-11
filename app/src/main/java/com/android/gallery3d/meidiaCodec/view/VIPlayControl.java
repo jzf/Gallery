@@ -16,5 +16,6 @@ public interface VIPlayControl {
     void seekTo(long durationT);
     int getPlayState();
     long getProgress();
+    void setDuration(long duration);
     long getDuration();
 }

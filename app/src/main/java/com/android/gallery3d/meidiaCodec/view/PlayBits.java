@@ -8,10 +8,10 @@ import com.android.gallery3d.glrenderer.GLCanvas;
  * Created by linusyang on 16-12-8.
  */
 
-public abstract class PlayBits implements VIPlayControl ,StateIs{
+public class PlayBits implements VIPlayControl ,StateIs{
 
 
-    private Bitmap mPreBitmap;
+
 
     public interface OnNotifyChangeListener {
         void doInvalidate();
@@ -34,23 +34,62 @@ public abstract class PlayBits implements VIPlayControl ,StateIs{
         this.mHeight = height;
     }
 
-    public void setAnimationDuration(long animationDuration) {
-        this.mAnimationDuration = animationDuration;
+    public  void onDraw(GLCanvas canvas) {
+
     }
 
-    public void setChangeDuration(long changeDuration) {
-        this.mChangeDuration = changeDuration;
+
+    /**
+     * @hide
+     */
+    @Override
+    public void prepare() {
+
     }
 
-    public abstract void onDraw(GLCanvas canvas);
+    @Override
+    public void start() {
 
-
-    public void setPreBitmap(Bitmap preBitmap) {
-        this.mPreBitmap = preBitmap;
     }
 
-    public Bitmap getPreBitmap() {
-        return mPreBitmap;
+    @Override
+    public void restart() {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void stop() {
+
+    }
+
+    @Override
+    public void seekTo(long durationT) {
+
+    }
+
+    @Override
+    public int getPlayState() {
+        return 0;
+    }
+
+    @Override
+    public long getProgress() {
+        return 0;
+    }
+
+    @Override
+    public void setDuration(long duration) {
+
+    }
+
+    @Override
+    public long getDuration() {
+        return 0;
     }
 
 }

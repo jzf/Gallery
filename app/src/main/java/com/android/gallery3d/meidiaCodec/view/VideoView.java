@@ -20,6 +20,7 @@ public class VideoView extends GLView implements VIPlayControl, PlayBits.OnNotif
 
     private Context mContext;
     private Rect mWindowRect;
+    private PlayBits mPlayBits;
 
 
     public VideoView(Context context) {
@@ -83,6 +84,11 @@ public class VideoView extends GLView implements VIPlayControl, PlayBits.OnNotif
     @Annotation.IInterface("VIPlayControl")
     public long getProgress() {
         return 0;
+    }
+
+    @Override
+    public void setDuration(long duration) {
+
     }
 
     @Override
