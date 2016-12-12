@@ -3,7 +3,7 @@ package com.android.gallery3d.app;
 import android.app.Activity;
 import android.os.Bundle;
 import com.android.gallery3d.R;
-import com.android.gallery3d.meidiaCodec.view.VideoView;
+import com.android.gallery3d.mediaCore.view.VideoView;
 import com.android.gallery3d.ui.GLRootView;
 
 /**

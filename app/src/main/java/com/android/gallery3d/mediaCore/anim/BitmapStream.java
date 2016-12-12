@@ -1,11 +1,10 @@
-package com.android.gallery3d.meidiaCodec.anim;
+package com.android.gallery3d.mediaCore.anim;
 
 import android.graphics.Bitmap;
 import android.view.animation.Interpolator;
 
 import com.android.gallery3d.common.Utils;
 import com.android.gallery3d.glrenderer.BitmapTexture;
-import com.android.gallery3d.glrenderer.GLCanvas;
 
 /**
  * Created by linusyang on 16-12-9.

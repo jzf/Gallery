@@ -1,16 +1,13 @@
-package com.android.gallery3d.meidiaCodec.view;
+package com.android.gallery3d.mediaCore.view;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Rect;
 
 import com.android.gallery3d.glrenderer.GLCanvas;
-import com.android.gallery3d.meidiaCodec.Utils.Annotation;
-import com.android.gallery3d.meidiaCodec.Utils.Utils;
-import com.android.gallery3d.meidiaCodec.anim.MediaStream;
+import com.android.gallery3d.mediaCore.Utils.Annotation;
+import com.android.gallery3d.mediaCore.Utils.Utils;
+import com.android.gallery3d.mediaCore.anim.MediaStream;
 import com.android.gallery3d.ui.GLView;
-
-import java.util.LinkedList;
 
 /**
  * Created by linusyang on 16-12-1.

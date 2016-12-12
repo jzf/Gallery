@@ -1,4 +1,4 @@
-package com.android.gallery3d.meidiaCodec.entiry;
+package com.android.gallery3d.mediaCore.entiry;
 
 import android.graphics.Bitmap;
 

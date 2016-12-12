@@ -3,7 +3,6 @@ package com.android.gallery3d.app;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,8 +12,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.android.gallery3d.R;
-import com.android.gallery3d.meidiaCodec.anim.ZoomBmStream;
-import com.android.gallery3d.meidiaCodec.view.VideoView;
+import com.android.gallery3d.mediaCore.anim.ZoomBmStream;
+import com.android.gallery3d.mediaCore.view.VideoView;
 import com.android.gallery3d.ui.GLRootView;
 
 /**

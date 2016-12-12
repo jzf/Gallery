@@ -1,4 +1,4 @@
-package com.android.gallery3d.meidiaCodec.Utils;
+package com.android.gallery3d.mediaCore.Utils;
 
 /**
  * Created by linus.yang on 2016/12/12.

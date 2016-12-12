@@ -1,9 +1,9 @@
-package com.android.gallery3d.meidiaCodec.anim;
+package com.android.gallery3d.mediaCore.anim;
 
 
 import com.android.gallery3d.glrenderer.GLCanvas;
-import com.android.gallery3d.meidiaCodec.view.StateIs;
-import com.android.gallery3d.meidiaCodec.view.VIPlayControl;
+import com.android.gallery3d.mediaCore.view.StateIs;
+import com.android.gallery3d.mediaCore.view.VIPlayControl;
 
 /**
  * Created by linusyang on 16-12-9.

@@ -1,19 +1,11 @@
 package com.android.gallery3d.ui;
 
-import android.graphics.Color;
 import android.graphics.Rect;
-import android.os.Environment;
-import android.util.*;
-import android.view.Surface;
-import android.view.SurfaceHolder;
 
 import com.android.gallery3d.glrenderer.GLCanvas;
-import com.android.gallery3d.glrenderer.GLPaint;
-import com.android.gallery3d.meidiaCodec.MoviePlayer;
-import com.android.gallery3d.meidiaCodec.VedioScreenNail;
+import com.android.gallery3d.mediaCore.VedioScreenNail;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by bruce.jiang on 2016/11/30.

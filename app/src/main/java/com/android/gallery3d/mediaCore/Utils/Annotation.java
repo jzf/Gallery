@@ -1,4 +1,4 @@
-package com.android.gallery3d.meidiaCodec.Utils;
+package com.android.gallery3d.mediaCore.Utils;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

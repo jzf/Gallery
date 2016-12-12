@@ -1,4 +1,4 @@
-package com.android.gallery3d.meidiaCodec.anim;
+package com.android.gallery3d.mediaCore.anim;
 
 import android.graphics.Bitmap;
 import android.graphics.PointF;

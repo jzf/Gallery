@@ -1,10 +1,8 @@
-package com.android.gallery3d.meidiaCodec.view;
-
-import android.graphics.Bitmap;
+package com.android.gallery3d.mediaCore.view;
 
 import com.android.gallery3d.glrenderer.GLCanvas;
-import com.android.gallery3d.meidiaCodec.anim.BitmapStream;
-import com.android.gallery3d.meidiaCodec.anim.MediaStream;
+import com.android.gallery3d.mediaCore.anim.BitmapStream;
+import com.android.gallery3d.mediaCore.anim.MediaStream;
 
 /**
  * Created by linusyang on 16-12-8.

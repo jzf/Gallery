@@ -1,4 +1,4 @@
-package com.android.gallery3d.meidiaCodec.anim;
+package com.android.gallery3d.mediaCore.anim;
 
 import com.android.gallery3d.glrenderer.GLCanvas;
 

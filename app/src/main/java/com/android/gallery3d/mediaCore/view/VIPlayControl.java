@@ -1,6 +1,4 @@
-package com.android.gallery3d.meidiaCodec.view;
-
-import android.graphics.Bitmap;
+package com.android.gallery3d.mediaCore.view;
 
 /**
  * Created by linusyang on 16-12-8.
