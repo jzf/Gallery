@@ -96,6 +96,10 @@ public abstract class MediaStream implements VIPlayControl , StateIs{
         }
     }
 
+    public boolean isCompletion() {
+        return mCurrentDurationTime == mDuration &&  mPlayState != PLAY_STATE_STOP;
+    }
+
 
     /**
      * @param canvas GLCanvas gives a convenient interface to draw using OpenGL.

@@ -15,9 +15,11 @@ public abstract class BitmapStream  extends MediaStream {
 
     protected Interpolator mInterpolator;
     protected BitmapTexture mCurrentTexture;
+    protected int mRotation;
 
     public BitmapStream(Bitmap bitmap , int rotation) {
         if(bitmap == null) throw new NullPointerException("bitmap == null");
+        mRotation = rotation;
          mCurrentTexture = new BitmapTexture(bitmap);
         if (((rotation / 90) & 0x01) == 0) {
             mWidth = bitmap.getWidth();

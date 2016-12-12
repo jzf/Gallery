@@ -39,6 +39,7 @@ public class ZoomBmStream extends BitmapStream {
         float centerY = viewHeight / 2 + mMovingVector.y * mProgress;
         canvas.translate(centerX, centerY);
         canvas.scale(scale, scale, 0);
+        canvas.rotate(mRotation, 0, 0, 1);
         mCurrentTexture.draw(canvas, -mCurrentTexture.getWidth() / 2,
                 -mCurrentTexture.getHeight() / 2);
     }

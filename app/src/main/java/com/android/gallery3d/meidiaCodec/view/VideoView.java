@@ -6,6 +6,8 @@ import android.graphics.Rect;
 
 import com.android.gallery3d.glrenderer.GLCanvas;
 import com.android.gallery3d.meidiaCodec.Utils.Annotation;
+import com.android.gallery3d.meidiaCodec.Utils.Utils;
+import com.android.gallery3d.meidiaCodec.anim.MediaStream;
 import com.android.gallery3d.ui.GLView;
 
 import java.util.LinkedList;
@@ -16,85 +18,105 @@ import java.util.LinkedList;
 
 public class VideoView extends GLView implements VIPlayControl, PlayBits.OnNotifyChangeListener , StateIs{
 
-
+    public interface PlayStateListener {
+        void onCompletion();
+    }
 
     private Context mContext;
     private Rect mWindowRect;
     private PlayBits mPlayBits;
+    private PlayStateListener mPlayStateListener;
 
 
     public VideoView(Context context) {
         mContext = context;
+        mPlayBits = new PlayBits();
+        mPlayBits.setOnNotifyChangeListener(this);
+        setBackgroundColor(new float[]{0,0,0,0});
     }
 
     @Override
     protected void onLayout(boolean changeSize, int left, int top, int right, int bottom) {
         super.onLayout(changeSize, left, top, right, bottom);
         mWindowRect = new Rect(left, top, right, bottom);
+        int width = right - left;
+        int height = bottom - top;
+        mPlayBits.setResolution(width, height);
+    }
+
+    public void setPlayStateListener(PlayStateListener playStateListener) {
+        mPlayStateListener = playStateListener;
     }
 
     @Override
     protected void render(GLCanvas canvas) {
         super.render(canvas);
+        mPlayBits.onDraw(canvas);
+    }
+
+    public void prepare(MediaStream mediaStream) {
+        Utils.checkNull(mediaStream, "VideoVIew prepare NULL");
+        mPlayBits.prepare(mediaStream);
     }
 
     @Override
     @Annotation.IInterface("VIPlayControl")
     public void prepare() {
-
+        mPlayBits.prepare();
     }
 
     @Override
     @Annotation.IInterface("VIPlayControl")
     public void start() {
-
+        mPlayBits.start();
+        invalidate();
     }
 
     @Override
     @Annotation.IInterface("VIPlayControl")
     public void restart() {
-
+        mPlayBits.restart();
     }
 
     @Override
     @Annotation.IInterface("VIPlayControl")
     public void pause() {
-
+        mPlayBits.pause();
     }
 
     @Override
     @Annotation.IInterface("VIPlayControl")
     public void stop() {
-
+        mPlayBits.stop();
     }
 
     @Override
     @Annotation.IInterface("VIPlayControl")
     public void seekTo(long durationT) {
-
+        mPlayBits.seekTo(durationT);
     }
 
     @Override
     @Annotation.IInterface("VIPlayControl")
     public int getPlayState() {
-        return 0;
+        return mPlayBits.getPlayState();
     }
 
     @Override
     @Annotation.IInterface("VIPlayControl")
     public long getProgress() {
-        return 0;
+        return mPlayBits.getProgress();
     }
 
     @Override
     public void setDuration(long duration) {
-
+        mPlayBits.setDuration(duration);
     }
 
     @Override
     @Annotation.IInterface("VIPlayControl")
     public long getDuration() {
-        return 0;
+        return mPlayBits.getDuration();
     }
 
     @Override
@@ -103,8 +125,10 @@ public class VideoView extends GLView implements VIPlayControl, PlayBits.OnNotif
         invalidate();
     }
 
-
-    private void  checkNull(Object obj , String str) {
-        if(obj == null) throw new NullPointerException(str);
+    @Override
+    public void notifyCompletion() {
+        if(mPlayStateListener != null)  mPlayStateListener.onCompletion();
     }
+
+
 }
