@@ -1,6 +1,7 @@
 package com.android.gallery3d.mediaCore.anim;
 
 
+import com.android.gallery3d.common.Utils;
 import com.android.gallery3d.glrenderer.GLCanvas;
 import com.android.gallery3d.mediaCore.view.StateIs;
 import com.android.gallery3d.mediaCore.view.VIPlayControl;
@@ -111,7 +112,16 @@ public abstract class MediaStream implements VIPlayControl , StateIs{
      */
     public abstract void apply(GLCanvas canvas);
 
-    public abstract boolean calculate(long currentTimeMillis);
+
+    public boolean calculate(long currentTimeMillis) {
+        if(mPlayState == PLAY_STATE_STOP || mPlayState == PLAY_STATE_PAUSE) return false;
+        int elapse = (int) (currentTimeMillis - mStartTime);
+        mCurrentDurationTime = elapse > mDuration ? mDuration : elapse;
+        float x = Utils.clamp((float) elapse / mDuration, 0f, 1f);
+        onCalculate( x);
+        return true;
+    }
+
     /**
      * @return the current time in milliseconds since January 1, 1970 00:00:00.0 UTC.
      */

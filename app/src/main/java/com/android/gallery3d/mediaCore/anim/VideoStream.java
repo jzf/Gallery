@@ -23,33 +23,13 @@ public class VideoStream extends MediaStream {
         mVideoPath = videoPath;
     }
 
-    @Override
-    public void start() {
-        if(mPlayState == PLAY_STATE_STOP) {
-            mStartTime = getCurrentTime();
-            mPlayState = PLAY_STATE_START;
-            mVideoScreenNail.play(mVideoPath);
-        } else if( mPlayState == PLAY_STATE_PAUSE ) {
-            mStartTime = getCurrentTime() -  mCurrentDurationTime;
-            mPlayState = PLAY_STATE_START;
-            calculate(mStartTime);
-        }
-    }
 
     @Override
     public void apply(GLCanvas canvas) {
         mVideoScreenNail.draw(canvas, 0, 0, mWidth, mHeight );
     }
 
-    @Override
-    public boolean calculate(long currentTimeMillis) {
-        if(mPlayState == PLAY_STATE_STOP || mPlayState == PLAY_STATE_PAUSE) return false;
-        int elapse = (int) (currentTimeMillis - mStartTime);
-        mCurrentDurationTime = elapse > mDuration ? mDuration : elapse;
-        float x = Utils.clamp((float) elapse / mDuration, 0f, 1f);
-        onCalculate( x);
-        return false;
-    }
+
 
     @Override
     protected void onCalculate(float progress) {

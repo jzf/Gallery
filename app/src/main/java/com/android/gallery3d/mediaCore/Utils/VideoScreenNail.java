@@ -56,33 +56,33 @@ public class VideoScreenNail extends SurfaceTextureScreenNail implements MoviePl
     }
 
     public void play(File file){
-        if (mPlayTask != null) {
-            Log.w(TAG, "movie already playing");
-            return;
-        }
-
-        Log.d(TAG, "starting movie");
-        SpeedControlCallback callback = new SpeedControlCallback();
-        Surface surface = new Surface(getSurfaceTexture());
-
-        // Don't leave the last frame of the previous video hanging on the screen.
-        // Looks weird if the aspect ratio changes.
-//        clearSurface(surface);
-
-        MoviePlayer player = null;
-        try {
-            player = new MoviePlayer(
-                    file, surface, callback);
-        } catch (IOException ioe) {
-            Log.e(TAG, "Unable to play movie", ioe);
-            surface.release();
-            return;
-        }
-
-
-        mPlayTask = new MoviePlayer.PlayTask(player, this);
-
-        mPlayTask.execute();
+//        if (mPlayTask != null) {
+//            Log.w(TAG, "movie already playing");
+//            return;
+//        }
+//
+//        Log.d(TAG, "starting movie");
+//        SpeedControlCallback callback = new SpeedControlCallback();
+//        Surface surface = new Surface(getSurfaceTexture());
+//
+//        // Don't leave the last frame of the previous video hanging on the screen.
+//        // Looks weird if the aspect ratio changes.
+////        clearSurface(surface);
+//
+//        MoviePlayer player = null;
+//        try {
+//            player = new MoviePlayer(
+//                    file, surface, callback);
+//        } catch (IOException ioe) {
+//            Log.e(TAG, "Unable to play movie", ioe);
+//            surface.release();
+//            return;
+//        }
+//
+//
+//        mPlayTask = new MoviePlayer.PlayTask(player, this);
+//
+//        mPlayTask.execute();
     }
 
     @Override

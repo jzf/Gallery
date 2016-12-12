@@ -60,21 +60,25 @@ public class PlayBits implements VIPlayControl ,StateIs{
     @Override
     public void start() {
         mCurrentMediaStream.start();
+        mOnNotifyChangeListener.doInvalidate();
     }
 
     @Override
     public void restart() {
         mCurrentMediaStream.restart();
+        mOnNotifyChangeListener.doInvalidate();
     }
 
     @Override
     public void pause() {
         mCurrentMediaStream.pause();
+        mOnNotifyChangeListener.doInvalidate();
     }
 
     @Override
     public void stop() {
         mCurrentMediaStream.stop();
+        mOnNotifyChangeListener.doInvalidate();
     }
 
     @Override

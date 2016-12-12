@@ -31,15 +31,4 @@ public abstract class BitmapStream  extends MediaStream {
             bitmapHeight = bitmap.getWidth();
         }
     }
-
-    @Override
-    public boolean calculate(long currentTimeMillis) {
-        if(mPlayState == PLAY_STATE_STOP || mPlayState == PLAY_STATE_PAUSE) return false;
-        int elapse = (int) (currentTimeMillis - mStartTime);
-        mCurrentDurationTime = elapse > mDuration ? mDuration : elapse;
-        float x = Utils.clamp((float) elapse / mDuration, 0f, 1f);
-        Interpolator i = mInterpolator;
-        onCalculate(i != null ? i.getInterpolation(x) : x);
-        return true;
-    }
 }

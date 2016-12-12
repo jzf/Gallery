@@ -67,7 +67,6 @@ public class VideoView extends GLView implements VIPlayControl, PlayBits.OnNotif
     @Annotation.IInterface("VIPlayControl")
     public void start() {
         mPlayBits.start();
-        invalidate();
     }
 
     @Override
