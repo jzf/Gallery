@@ -12,9 +12,13 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.android.gallery3d.R;
+import com.android.gallery3d.mediaCore.anim.MediaStream;
+import com.android.gallery3d.mediaCore.anim.VideoStream;
 import com.android.gallery3d.mediaCore.anim.ZoomBmStream;
 import com.android.gallery3d.mediaCore.view.VideoView;
 import com.android.gallery3d.ui.GLRootView;
+
+import java.io.File;
 
 /**
  * Created by linusyang on 16-12-1.
@@ -76,7 +80,9 @@ public class VideoViewDome2 extends Activity implements VideoView.PlayStateListe
     private Bitmap getBitmap() {
         if (bitmapIndex == 5) {
             bitmapIndex = 1;
+            return  null;
         }
+
         int bitmapId = getResources().getIdentifier("image" + bitmapIndex, "mipmap", getPackageName());
         BitmapFactory.Options mOptions = new BitmapFactory.Options();
         //  mOptions.inSampleSize = 2;
@@ -150,8 +156,17 @@ public class VideoViewDome2 extends Activity implements VideoView.PlayStateListe
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                ZoomBmStream mZoomBmStream = new ZoomBmStream(getBitmap(), 0);
-                mVideo.prepare(mZoomBmStream);
+                File mFile = new File("/storage/emulated/0/DCIM/Camera/a.mp4");
+
+                MediaStream mMediaStream = null;
+                Bitmap mBitmap = getBitmap();
+                if(mBitmap != null) {
+                    mMediaStream = new ZoomBmStream(mBitmap , 0);
+                } else {
+                    System.out.println("video======"+mFile.exists());
+                    mMediaStream = new VideoStream(mFile);
+                }
+                mVideo.prepare(mMediaStream);
                 mVideo.setDuration(3000);
                 tvDuTime.setText(mVideo.getDuration() + " ");
                 mSeekBar.setMax((int) mVideo.getDuration());

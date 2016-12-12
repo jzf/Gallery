@@ -1,4 +1,4 @@
-package com.android.gallery3d.mediaCore;
+package com.android.gallery3d.mediaCore.Utils;
 
 import android.graphics.Color;
 import android.graphics.SurfaceTexture;
@@ -18,17 +18,11 @@ import java.io.IOException;
  * Created by bruce.jiang on 2016/11/30.
  */
 
-public class VedioScreenNail extends SurfaceTextureScreenNail implements MoviePlayer.PlayerFeedback {
-    private static final String TAG = "VedioScreenNail";
+public class VideoScreenNail extends SurfaceTextureScreenNail implements MoviePlayer.PlayerFeedback {
+    private static final String TAG = "VideoScreenNail";
 
     private MoviePlayer.PlayTask mPlayTask;
-    private VideoDomeActivity mActivity;
-    public VedioScreenNail(VideoDomeActivity activity) {
-        this.mActivity = activity;
-    }
-
-    public void draw(GLCanvas canvas, int width, int height, int rotation, float progress) {
-
+    public VideoScreenNail() {
     }
 
     @Override
@@ -43,12 +37,12 @@ public class VedioScreenNail extends SurfaceTextureScreenNail implements MoviePl
 
     @Override
     public void onFrameAvailable(SurfaceTexture surfaceTexture) {
-        invalidate();
+       // invalidate();
     }
 
     protected void invalidate() {
-        GLRoot root = mActivity.getGLRoot();
-        if (root != null) root.requestRender();
+//        GLRoot root = mActivity.getGLRoot();
+//        if (root != null) root.requestRender();
     }
     @Override
     public void draw(GLCanvas canvas, int x, int y, int width, int height) {

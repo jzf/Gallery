@@ -3,7 +3,7 @@ package com.android.gallery3d.ui;
 import android.graphics.Rect;
 
 import com.android.gallery3d.glrenderer.GLCanvas;
-import com.android.gallery3d.mediaCore.VedioScreenNail;
+import com.android.gallery3d.mediaCore.Utils.VideoScreenNail;
 
 import java.io.File;
 
@@ -14,7 +14,7 @@ import java.io.File;
 public class VideoView extends GLView {
     private static final String TAG = "VideoView";
 
-    private VedioScreenNail mScreenNail;
+    private VideoScreenNail mScreenNail;
     private Rect mRect;
     private float mProgress;
     @Override
@@ -46,7 +46,7 @@ public class VideoView extends GLView {
     public void stop(){
         mScreenNail.stopPlayback();
     }
-    public void setmScreenNail(VedioScreenNail mScreenNail) {
+    public void setmScreenNail(VideoScreenNail mScreenNail) {
         this.mScreenNail = mScreenNail;
     }
 

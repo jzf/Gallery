@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.gallery3d.mediaCore;
+package com.android.gallery3d.mediaCore.Utils;
 
 import android.util.Log;
 

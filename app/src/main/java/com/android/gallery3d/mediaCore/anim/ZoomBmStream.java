@@ -22,17 +22,17 @@ public class ZoomBmStream extends BitmapStream {
     public ZoomBmStream(Bitmap bitmap, int rotation) {
         super(bitmap, rotation);
         mMovingVector = new PointF(
-                MOVE_SPEED * mWidth * (mRandom.nextFloat() - 0.5f),
-                MOVE_SPEED * mHeight * (mRandom.nextFloat() - 0.5f));
+                MOVE_SPEED * bitmapWidth * (mRandom.nextFloat() - 0.5f),
+                MOVE_SPEED * bitmapHeight * (mRandom.nextFloat() - 0.5f));
     }
 
     @Override
     public void apply(GLCanvas canvas) {
-        int viewWidth = mWidth;
-        int viewHeight = mHeight;
+        int viewWidth = bitmapWidth;
+        int viewHeight = bitmapHeight;
 
         float initScale = Math.min((float)
-                viewWidth / mWidth, (float) viewHeight / mHeight);
+                viewWidth / bitmapWidth, (float) viewHeight / bitmapHeight);
         float scale = initScale * (1 + SCALE_SPEED * mProgress);
 
         float centerX = viewWidth / 2 + mMovingVector.x * mProgress;

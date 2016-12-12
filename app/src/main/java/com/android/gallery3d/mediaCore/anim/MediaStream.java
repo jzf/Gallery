@@ -35,6 +35,11 @@ public abstract class MediaStream implements VIPlayControl , StateIs{
         }
     }
 
+    public void setResolution(int width, int height) {
+        this.mWidth = width;
+        this.mHeight = height;
+    }
+
     @Override
     public void prepare() {
 

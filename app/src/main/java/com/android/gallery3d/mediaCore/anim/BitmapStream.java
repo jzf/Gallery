@@ -16,16 +16,19 @@ public abstract class BitmapStream  extends MediaStream {
     protected BitmapTexture mCurrentTexture;
     protected int mRotation;
 
+    protected int bitmapWidth;
+    protected int bitmapHeight;
+
     public BitmapStream(Bitmap bitmap , int rotation) {
         if(bitmap == null) throw new NullPointerException("bitmap == null");
         mRotation = rotation;
          mCurrentTexture = new BitmapTexture(bitmap);
         if (((rotation / 90) & 0x01) == 0) {
-            mWidth = bitmap.getWidth();
-            mHeight = bitmap.getHeight();
+            bitmapWidth = bitmap.getWidth();
+            bitmapHeight = bitmap.getHeight();
         } else {
-            mWidth = bitmap.getHeight();
-            mHeight = bitmap.getWidth();
+            bitmapWidth = bitmap.getHeight();
+            bitmapHeight = bitmap.getWidth();
         }
     }
 
