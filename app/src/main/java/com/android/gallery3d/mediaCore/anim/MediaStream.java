@@ -32,7 +32,7 @@ public abstract class MediaStream implements VIPlayControl , StateIs{
         } else if( mPlayState == PLAY_STATE_PAUSE ) {
             mStartTime = getCurrentTime() -  mCurrentDurationTime;
             mPlayState = PLAY_STATE_START;
-            calculate(mStartTime);
+            calculate(getCurrentTime());
         }
     }
 
@@ -115,7 +115,7 @@ public abstract class MediaStream implements VIPlayControl , StateIs{
 
     public boolean calculate(long currentTimeMillis) {
         if(mPlayState == PLAY_STATE_STOP || mPlayState == PLAY_STATE_PAUSE) return false;
-        int elapse = (int) (currentTimeMillis - mStartTime);
+        long elapse =  currentTimeMillis - mStartTime;
         mCurrentDurationTime = elapse > mDuration ? mDuration : elapse;
         float x = Utils.clamp((float) elapse / mDuration, 0f, 1f);
         onCalculate( x);

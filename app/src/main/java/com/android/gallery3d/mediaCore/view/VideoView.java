@@ -54,7 +54,6 @@ public class VideoView extends GLView implements VIPlayControl, PlayBits.OnNotif
     public void prepare(MediaStream mediaStream) {
         Utils.checkNull(mediaStream, "VideoVIew prepare NULL");
         mPlayBits.prepare(mediaStream);
-        invalidate();
     }
 
     @Override

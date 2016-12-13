@@ -1,5 +1,7 @@
 package com.android.gallery3d.mediaCore.view;
 
+import android.os.SystemClock;
+
 import com.android.gallery3d.glrenderer.GLCanvas;
 import com.android.gallery3d.mediaCore.anim.BitmapStream;
 import com.android.gallery3d.mediaCore.anim.MediaStream;
@@ -29,12 +31,13 @@ public class PlayBits implements VIPlayControl ,StateIs{
     public void setResolution(int width, int height) {
         this.mWidth = width;
         this.mHeight = height;
+
     }
 
     public  void onDraw(GLCanvas canvas) {
         boolean requestRender = false;
         if (mCurrentMediaStream != null) {
-            requestRender |= mCurrentMediaStream.calculate(BitmapStream.getCurrentTime());
+            requestRender |= mCurrentMediaStream.calculate(MediaStream.getCurrentTime());
             canvas.save(GLCanvas.SAVE_FLAG_ALPHA | GLCanvas.SAVE_FLAG_MATRIX);
             mCurrentMediaStream.apply(canvas);
             canvas.restore();
