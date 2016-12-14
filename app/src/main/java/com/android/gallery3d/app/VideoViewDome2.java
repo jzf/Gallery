@@ -156,7 +156,7 @@ public class VideoViewDome2 extends Activity implements VideoView.PlayStateListe
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                File mFile = new File("/storage/emulated/0/DCIM/Camera/a.mp4");
+                File mFile = new File("/storage/emulated/0/DCIM/Camera/g.mp4");
 
                 MediaStream mMediaStream = null;
                 Bitmap mBitmap = getBitmap();
@@ -164,7 +164,7 @@ public class VideoViewDome2 extends Activity implements VideoView.PlayStateListe
                     mMediaStream = new ZoomBmStream(mBitmap , 0);
                 } else {
                     System.out.println("video======"+mFile.exists());
-                    mMediaStream = new VideoStream(mFile);
+                    mMediaStream = new VideoStream(mFile, VideoViewDome2.this);
                 }
                 mVideo.prepare(mMediaStream);
                 mVideo.setDuration(3000);

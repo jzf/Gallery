@@ -1,5 +1,6 @@
 package com.android.gallery3d.mediaCore.Utils;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.SurfaceTexture;
 import android.util.Log;
@@ -22,7 +23,13 @@ public class VideoScreenNail extends SurfaceTextureScreenNail implements MoviePl
     private static final String TAG = "VideoScreenNail";
 
     private MoviePlayer.PlayTask mPlayTask;
-    public VideoScreenNail() {
+    private boolean isPlay = false;
+    private File mFile;
+    private Activity mActivity;
+    public VideoScreenNail(File mFile , Activity mActivity) {
+        isPlay = false;
+        this.mActivity = mActivity;
+        this.mFile = mFile;
     }
 
     @Override
@@ -52,37 +59,46 @@ public class VideoScreenNail extends SurfaceTextureScreenNail implements MoviePl
         canvas.drawRect(100,100, 600,600,mPaint);
         if (getSurfaceTexture() == null)
             super.acquireSurfaceTexture(canvas);
+        if(getSurfaceTexture() != null && !isPlay) {
+            mActivity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    play(mFile);
+                    isPlay = true;
+                }
+            });
 
+        }
     }
 
     public void play(File file){
-//        if (mPlayTask != null) {
-//            Log.w(TAG, "movie already playing");
-//            return;
-//        }
-//
-//        Log.d(TAG, "starting movie");
-//        SpeedControlCallback callback = new SpeedControlCallback();
-//        Surface surface = new Surface(getSurfaceTexture());
-//
-//        // Don't leave the last frame of the previous video hanging on the screen.
-//        // Looks weird if the aspect ratio changes.
-////        clearSurface(surface);
-//
-//        MoviePlayer player = null;
-//        try {
-//            player = new MoviePlayer(
-//                    file, surface, callback);
-//        } catch (IOException ioe) {
-//            Log.e(TAG, "Unable to play movie", ioe);
-//            surface.release();
-//            return;
-//        }
-//
-//
-//        mPlayTask = new MoviePlayer.PlayTask(player, this);
-//
-//        mPlayTask.execute();
+        if (mPlayTask != null) {
+            Log.w(TAG, "movie already playing");
+            return;
+        }
+
+        Log.d(TAG, "starting movie");
+        SpeedControlCallback callback = new SpeedControlCallback();
+        Surface surface = new Surface(getSurfaceTexture());
+
+        // Don't leave the last frame of the previous video hanging on the screen.
+        // Looks weird if the aspect ratio changes.
+//        clearSurface(surface);
+
+        MoviePlayer player = null;
+        try {
+            player = new MoviePlayer(
+                    file, surface, callback);
+        } catch (IOException ioe) {
+            Log.e(TAG, "Unable to play movie", ioe);
+            surface.release();
+            return;
+        }
+
+
+        mPlayTask = new MoviePlayer.PlayTask(player, this);
+
+        mPlayTask.execute();
     }
 
     @Override

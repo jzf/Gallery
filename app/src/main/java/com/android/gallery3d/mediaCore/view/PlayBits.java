@@ -53,6 +53,7 @@ public class PlayBits implements VIPlayControl ,StateIs{
 
     public void prepare(MediaStream mediaStream) {
         this.mCurrentMediaStream = mediaStream;
+        mCurrentMediaStream.setResolution(mWidth, mHeight);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.android.gallery3d.mediaCore.anim;
 
+import android.app.Activity;
 import android.view.animation.Interpolator;
 
 import com.android.gallery3d.common.Utils;
@@ -17,9 +18,9 @@ public class VideoStream extends MediaStream {
     private VideoScreenNail mVideoScreenNail;
     private File mVideoPath;
 
-    public VideoStream(File videoPath) {
-        mVideoScreenNail  = new VideoScreenNail();
+    public VideoStream(File videoPath, Activity mActivity) {
         if(!videoPath.exists()) throw new RuntimeException("video not exists ");
+        mVideoScreenNail  = new VideoScreenNail(videoPath, mActivity);
         mVideoPath = videoPath;
     }
 
