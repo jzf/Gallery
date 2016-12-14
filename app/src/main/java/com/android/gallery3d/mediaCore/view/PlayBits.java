@@ -1,6 +1,7 @@
 package com.android.gallery3d.mediaCore.view;
 
 import com.android.gallery3d.glrenderer.GLCanvas;
+import com.android.gallery3d.mediaCore.anim.ComboStream;
 import com.android.gallery3d.mediaCore.anim.MediaStream;
 import com.android.gallery3d.mediaCore.view.Inte.OnNotifyChangeListener;
 import com.android.gallery3d.mediaCore.view.Inte.StateIs;
@@ -37,15 +38,17 @@ public class PlayBits implements VIPlayControl,StateIs {
             canvas.save(GLCanvas.SAVE_FLAG_ALPHA | GLCanvas.SAVE_FLAG_MATRIX);
             mCurrentMediaStream.apply(canvas);
             canvas.restore();
+            if(mCurrentMediaStream.isCompletion()) playCompletion();
         }
-
         if (requestRender) mOnNotifyChangeListener.doInvalidate();
     }
 
 
     public void prepare(MediaStream mediaStream) {
+        if(mediaStream instanceof ComboStream) {
+            ((ComboStream) mediaStream).setPreStream(mCurrentMediaStream);
+        }
         this.mCurrentMediaStream = mediaStream;
-        mCurrentMediaStream.setNotifyChangeListener(mStreamNotify);
         mCurrentMediaStream.setResolution(mWidth, mHeight);
         prepare();
     }
@@ -53,26 +56,31 @@ public class PlayBits implements VIPlayControl,StateIs {
     @Override
     public void prepare() {
         mCurrentMediaStream.prepare();
+        mOnNotifyChangeListener.doInvalidate();
     }
 
     @Override
     public void start() {
         mCurrentMediaStream.start();
+        mOnNotifyChangeListener.doInvalidate();
     }
 
     @Override
     public void restart() {
         mCurrentMediaStream.restart();
+        mOnNotifyChangeListener.doInvalidate();
     }
 
     @Override
     public void pause() {
         mCurrentMediaStream.pause();
+        mOnNotifyChangeListener.doInvalidate();
     }
 
     @Override
     public void stop() {
         mCurrentMediaStream.stop();
+        mOnNotifyChangeListener.doInvalidate();
     }
 
     @Override
@@ -100,16 +108,9 @@ public class PlayBits implements VIPlayControl,StateIs {
         return mCurrentMediaStream.getDuration();
     }
 
-    private OnNotifyChangeListener mStreamNotify = new OnNotifyChangeListener() {
-        @Override
-        public void doInvalidate() {
-            mOnNotifyChangeListener.doInvalidate();
-        }
-
-        @Override
-        public void notifyCompletion() {
-            mOnNotifyChangeListener.notifyCompletion();
-        }
-    };
+    protected void playCompletion() {
+        stop();
+        mOnNotifyChangeListener.notifyCompletion();
+    }
 
 }

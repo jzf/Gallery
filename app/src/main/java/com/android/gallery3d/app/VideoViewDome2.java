@@ -12,9 +12,11 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.android.gallery3d.R;
+import com.android.gallery3d.mediaCore.anim.AlphaComboStream;
 import com.android.gallery3d.mediaCore.anim.MediaStream;
 import com.android.gallery3d.mediaCore.anim.VideoStream;
 import com.android.gallery3d.mediaCore.anim.ZoomBmStream;
+import com.android.gallery3d.mediaCore.view.Inte.StateIs;
 import com.android.gallery3d.mediaCore.view.VideoView;
 import com.android.gallery3d.ui.GLRootView;
 
@@ -161,13 +163,15 @@ public class VideoViewDome2 extends Activity implements VideoView.PlayStateListe
                 MediaStream mMediaStream = null;
                 Bitmap mBitmap = getBitmap();
                 if(mBitmap != null) {
-                    mMediaStream = new ZoomBmStream(mBitmap , 0);
+                 AlphaComboStream  alphaComboStream = new AlphaComboStream(new ZoomBmStream(mBitmap , 0));
+                    alphaComboStream.setTransitionAnimDuration(1000);
+                  //  alphaComboStream.setTransitionPlayMode(StateIs.TRANSITION_PLAY_MODE_ISOLATE);
+                    mMediaStream = alphaComboStream;
                 } else {
-                    System.out.println("video======"+mFile.exists());
                     mMediaStream = new VideoStream(mFile, VideoViewDome2.this);
                 }
                 mVideo.prepare(mMediaStream);
-                mVideo.setDuration(3000);
+                mVideo.setDuration(4000);
                 tvDuTime.setText(mVideo.getDuration() + " ");
                 mSeekBar.setMax((int) mVideo.getDuration());
                 mSeekBar.setProgress(0);

@@ -23,7 +23,7 @@ public abstract class MediaStream implements VIPlayControl , StateIs{
     protected int mWidth;
     protected int mHeight;
 
-    private OnNotifyChangeListener mOnNotifyChangeListener;
+    protected float mAnimProgress;
 
 
 
@@ -37,7 +37,6 @@ public abstract class MediaStream implements VIPlayControl , StateIs{
             mPlayState = PLAY_STATE_START;
             calculate(getCurrentTime());
         }
-        mOnNotifyChangeListener.doInvalidate();
     }
 
     public void setResolution(int width, int height) {
@@ -45,13 +44,9 @@ public abstract class MediaStream implements VIPlayControl , StateIs{
         this.mHeight = height;
     }
 
-    public void setNotifyChangeListener(OnNotifyChangeListener mOnNotifyChangeListener) {
-        this.mOnNotifyChangeListener = mOnNotifyChangeListener;
-    }
 
     @Override
     public void prepare() {
-        mOnNotifyChangeListener.doInvalidate();
     }
 
     @Override
@@ -59,14 +54,12 @@ public abstract class MediaStream implements VIPlayControl , StateIs{
         mStartTime = getCurrentTime();
         mPlayState = PLAY_STATE_START;
         calculate(mStartTime);
-        mOnNotifyChangeListener.doInvalidate();
     }
 
     @Override
     public void pause() {
         if(mPlayState == PLAY_STATE_START) {
             mPlayState = PLAY_STATE_PAUSE;
-            mOnNotifyChangeListener.doInvalidate();
         }
     }
 
@@ -122,14 +115,10 @@ public abstract class MediaStream implements VIPlayControl , StateIs{
      */
     public void apply(GLCanvas canvas){
         onDraw(canvas);
-        if(isCompletion()) {
-            stop();
-            mOnNotifyChangeListener.notifyCompletion();
-        }
     }
 
 
-    public abstract void onDraw(GLCanvas canvas);
+    public abstract void onDraw(GLCanvas canvas) ;
 
 
     public boolean calculate(long currentTimeMillis) {
@@ -148,6 +137,8 @@ public abstract class MediaStream implements VIPlayControl , StateIs{
         return System.currentTimeMillis();
     }
 
-    protected abstract void onCalculate(float progress);
+    protected void onCalculate(float progress) {
+        mAnimProgress = progress;
+    }
 
 }
