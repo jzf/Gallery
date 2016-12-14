@@ -27,7 +27,7 @@ public class ZoomBmStream extends BitmapStream {
     }
 
     @Override
-    public void apply(GLCanvas canvas) {
+    public void onDraw(GLCanvas canvas) {
         int viewWidth = bitmapWidth;
         int viewHeight = bitmapHeight;
 

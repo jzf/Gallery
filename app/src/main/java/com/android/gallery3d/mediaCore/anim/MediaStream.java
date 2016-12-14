@@ -3,8 +3,9 @@ package com.android.gallery3d.mediaCore.anim;
 
 import com.android.gallery3d.common.Utils;
 import com.android.gallery3d.glrenderer.GLCanvas;
-import com.android.gallery3d.mediaCore.view.StateIs;
-import com.android.gallery3d.mediaCore.view.VIPlayControl;
+import com.android.gallery3d.mediaCore.view.Inte.OnNotifyChangeListener;
+import com.android.gallery3d.mediaCore.view.Inte.StateIs;
+import com.android.gallery3d.mediaCore.view.Inte.VIPlayControl;
 
 /**
  * Created by linusyang on 16-12-9.
@@ -22,6 +23,8 @@ public abstract class MediaStream implements VIPlayControl , StateIs{
     protected int mWidth;
     protected int mHeight;
 
+    private OnNotifyChangeListener mOnNotifyChangeListener;
+
 
 
     @Override
@@ -34,6 +37,7 @@ public abstract class MediaStream implements VIPlayControl , StateIs{
             mPlayState = PLAY_STATE_START;
             calculate(getCurrentTime());
         }
+        mOnNotifyChangeListener.doInvalidate();
     }
 
     public void setResolution(int width, int height) {
@@ -41,9 +45,13 @@ public abstract class MediaStream implements VIPlayControl , StateIs{
         this.mHeight = height;
     }
 
+    public void setNotifyChangeListener(OnNotifyChangeListener mOnNotifyChangeListener) {
+        this.mOnNotifyChangeListener = mOnNotifyChangeListener;
+    }
+
     @Override
     public void prepare() {
-
+        mOnNotifyChangeListener.doInvalidate();
     }
 
     @Override
@@ -51,12 +59,14 @@ public abstract class MediaStream implements VIPlayControl , StateIs{
         mStartTime = getCurrentTime();
         mPlayState = PLAY_STATE_START;
         calculate(mStartTime);
+        mOnNotifyChangeListener.doInvalidate();
     }
 
     @Override
     public void pause() {
         if(mPlayState == PLAY_STATE_START) {
             mPlayState = PLAY_STATE_PAUSE;
+            mOnNotifyChangeListener.doInvalidate();
         }
     }
 
@@ -110,7 +120,16 @@ public abstract class MediaStream implements VIPlayControl , StateIs{
     /**
      * @param canvas GLCanvas gives a convenient interface to draw using OpenGL.
      */
-    public abstract void apply(GLCanvas canvas);
+    public void apply(GLCanvas canvas){
+        onDraw(canvas);
+        if(isCompletion()) {
+            stop();
+            mOnNotifyChangeListener.notifyCompletion();
+        }
+    }
+
+
+    public abstract void onDraw(GLCanvas canvas);
 
 
     public boolean calculate(long currentTimeMillis) {

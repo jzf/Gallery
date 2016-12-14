@@ -1,21 +1,17 @@
 package com.android.gallery3d.mediaCore.view;
 
-import android.os.SystemClock;
-
 import com.android.gallery3d.glrenderer.GLCanvas;
-import com.android.gallery3d.mediaCore.anim.BitmapStream;
 import com.android.gallery3d.mediaCore.anim.MediaStream;
+import com.android.gallery3d.mediaCore.view.Inte.OnNotifyChangeListener;
+import com.android.gallery3d.mediaCore.view.Inte.StateIs;
+import com.android.gallery3d.mediaCore.view.Inte.VIPlayControl;
 
 /**
  * Created by linusyang on 16-12-8.
  */
 
-public class PlayBits implements VIPlayControl ,StateIs{
+public class PlayBits implements VIPlayControl,StateIs {
 
-    public interface OnNotifyChangeListener {
-        void doInvalidate();
-        void notifyCompletion();
-    }
 
     protected int mWidth;
     protected int mHeight;
@@ -41,10 +37,6 @@ public class PlayBits implements VIPlayControl ,StateIs{
             canvas.save(GLCanvas.SAVE_FLAG_ALPHA | GLCanvas.SAVE_FLAG_MATRIX);
             mCurrentMediaStream.apply(canvas);
             canvas.restore();
-            if(mCurrentMediaStream.isCompletion()) {
-                mCurrentMediaStream.stop();
-                mOnNotifyChangeListener.notifyCompletion();
-            }
         }
 
         if (requestRender) mOnNotifyChangeListener.doInvalidate();
@@ -53,36 +45,34 @@ public class PlayBits implements VIPlayControl ,StateIs{
 
     public void prepare(MediaStream mediaStream) {
         this.mCurrentMediaStream = mediaStream;
+        mCurrentMediaStream.setNotifyChangeListener(mStreamNotify);
         mCurrentMediaStream.setResolution(mWidth, mHeight);
+        prepare();
     }
 
     @Override
     public void prepare() {
-        mCurrentMediaStream.pause();
+        mCurrentMediaStream.prepare();
     }
 
     @Override
     public void start() {
         mCurrentMediaStream.start();
-        mOnNotifyChangeListener.doInvalidate();
     }
 
     @Override
     public void restart() {
         mCurrentMediaStream.restart();
-        mOnNotifyChangeListener.doInvalidate();
     }
 
     @Override
     public void pause() {
         mCurrentMediaStream.pause();
-        mOnNotifyChangeListener.doInvalidate();
     }
 
     @Override
     public void stop() {
         mCurrentMediaStream.stop();
-        mOnNotifyChangeListener.doInvalidate();
     }
 
     @Override
@@ -109,5 +99,17 @@ public class PlayBits implements VIPlayControl ,StateIs{
     public long getDuration() {
         return mCurrentMediaStream.getDuration();
     }
+
+    private OnNotifyChangeListener mStreamNotify = new OnNotifyChangeListener() {
+        @Override
+        public void doInvalidate() {
+            mOnNotifyChangeListener.doInvalidate();
+        }
+
+        @Override
+        public void notifyCompletion() {
+            mOnNotifyChangeListener.notifyCompletion();
+        }
+    };
 
 }
