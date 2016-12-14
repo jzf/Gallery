@@ -14,7 +14,7 @@ public class AlphaComboStream extends ComboStream {
     }
 
     @Override
-    public void onDrawPreStream(GLCanvas canvas, long animTime, float gradientIndex) {;
+    public void onDrawPreStream(GLCanvas canvas, long animTime, float gradientIndex) {
         canvas.setAlpha(1f - gradientIndex);
         mPreStream.onDraw(canvas);
     }

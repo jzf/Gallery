@@ -20,15 +20,29 @@ public abstract class ComboStream extends MediaStream {
     }
 
     public void setPreStream(MediaStream preStream) {
-        this.mPreStream = preStream;
+        if(preStream instanceof ComboStream) {
+            this.mPreStream = ((ComboStream) preStream).getCurrentStream();
+        } else {
+            this.mPreStream = preStream;
+        }
     }
 
     public void setTransitionAnimDuration(long duration) {
         mTransitionAnimStream.setDuration(duration);
     }
 
+    public MediaStream getCurrentStream() {
+        return mCurrentStream;
+    }
+
     public void setTransitionPlayMode(int mode) {
         this.mTransitionPlayMode = mode;
+    }
+
+    @Override
+    public void setResolution(int width, int height) {
+        super.setResolution(width, height);
+        mCurrentStream.setResolution(width, height);
     }
 
     @Override

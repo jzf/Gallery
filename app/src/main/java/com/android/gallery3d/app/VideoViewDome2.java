@@ -168,7 +168,9 @@ public class VideoViewDome2 extends Activity implements VideoView.PlayStateListe
                   //  alphaComboStream.setTransitionPlayMode(StateIs.TRANSITION_PLAY_MODE_ISOLATE);
                     mMediaStream = alphaComboStream;
                 } else {
-                    mMediaStream = new VideoStream(mFile, VideoViewDome2.this);
+                    AlphaComboStream  alphaComboStrea = new AlphaComboStream( new VideoStream(mFile, VideoViewDome2.this) );
+                    alphaComboStrea.setTransitionAnimDuration(1000);
+                    mMediaStream = alphaComboStrea;
                 }
                 mVideo.prepare(mMediaStream);
                 mVideo.setDuration(4000);
